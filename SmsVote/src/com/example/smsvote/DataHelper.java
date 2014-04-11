@@ -12,12 +12,25 @@ public class DataHelper {
 		votesPerContestants = new HashMap<String, Integer>();
 	}
 	
+	private void addVoteToContestant(String contestant) {
+		if(votesPerContestants.get(contestant) == null) {
+			votesPerContestants.put(contestant, 1);
+		} else {
+			votesPerContestants.put(contestant, votesPerContestants.get(contestant));
+		}
+		
+	}
+	
 	public void addVote(String phoneNumber, String voteChoice) {
-		if (votesPerNumber.get(phoneNumber) <= 3) {
-			votesPerContestants.put(voteChoice,
-					votesPerContestants.get(voteChoice) + 1);
-			votesPerNumber.put(phoneNumber,
-					votesPerNumber.get(votesPerNumber) + 1);
+		if (votesPerNumber.get(phoneNumber) == null) {
+			votesPerNumber.put(phoneNumber, 1);
+			addVoteToContestant(voteChoice);
+			
+		} else {
+			if (votesPerNumber.get(phoneNumber) < 3) {
+				votesPerNumber.put(phoneNumber, votesPerNumber.get(phoneNumber) + 1);
+				addVoteToContestant(voteChoice);
+			}
 		}
 	}
 	
@@ -34,7 +47,7 @@ public class DataHelper {
 		String[] unifiedList = new String[votesPerContestants.size()];
 		int i = 0;
 		for(Entry<String, Integer> entry : votesPerContestants.entrySet()){
-			unifiedList[i] = (String) entry.getKey() + " " + (String) entry.getValue().toString();
+			unifiedList[i] = (String) entry.getKey() + " : " + (String) entry.getValue().toString();
 			i++;
 		}
 		return unifiedList;

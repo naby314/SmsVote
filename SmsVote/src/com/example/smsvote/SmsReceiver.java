@@ -9,6 +9,8 @@ import android.widget.Toast;
 
 public class SmsReceiver extends BroadcastReceiver{
 	public DataHelper data = new DataHelper();
+	
+	
 
 	@Override
 	public void onReceive(Context context, Intent intent) {
@@ -19,10 +21,10 @@ public class SmsReceiver extends BroadcastReceiver{
 		SmsMessage messages =SmsMessage.createFromPdu((byte[]) pdus[0]);    
 		if(isInteger(messages.getMessageBody())) {
 			abortBroadcast();
-//			data.addVote(messages.getDisplayOriginatingAddress(), messages.getDisplayMessageBody());
+			data.addVote(messages.getDisplayOriginatingAddress(), messages.getDisplayMessageBody());
 		}
 
-		Toast.makeText(context, messages.getOriginatingAddress() + messages.getDisplayMessageBody(),
+		Toast.makeText(context, messages.getOriginatingAddress() + " : " + messages.getDisplayMessageBody(),
 				Toast.LENGTH_SHORT).show();
 		
 	}
