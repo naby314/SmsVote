@@ -1,5 +1,8 @@
 package com.example.smsvote;
 
+
+import java.util.Calendar;
+
 import android.app.Activity;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -16,8 +19,10 @@ public class MainActivity extends Activity implements OnClickListener {
 	private SmsReceiver smsReceiver = null;
 	private String[] latestList = null;
 	private ListView lv = null;
-	//	private SmsReceiver receiver = null;
-
+	
+	public int startingSeconds;
+	public int endingSeconds;
+	
 	public void registerReceiver() {
 		smsReceiver = new SmsReceiver();
 		IntentFilter intentFilter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
@@ -31,6 +36,13 @@ public class MainActivity extends Activity implements OnClickListener {
 			smsReceiver = null;
 		}
 	}
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		unregisterReceiver();
+	}
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +63,11 @@ public class MainActivity extends Activity implements OnClickListener {
 			isCollecting = true;
 			startStopButton.setText(R.string.button_on);
 			registerReceiver();
+			
+			Calendar c = Calendar.getInstance(); 
+			startingSeconds = c.get(Calendar.SECOND);
+
+
 
 			
 		// STOPPING VOTES
@@ -65,6 +82,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			}
 
 			unregisterReceiver();
+			
+			Calendar c = Calendar.getInstance(); 
+			endingSeconds = c.get(Calendar.SECOND);
 
 
 		}

@@ -16,7 +16,7 @@ public class DataHelper {
 		if(votesPerContestants.get(contestant) == null) {
 			votesPerContestants.put(contestant, 1);
 		} else {
-			votesPerContestants.put(contestant, votesPerContestants.get(contestant));
+			votesPerContestants.put(contestant, votesPerContestants.get(contestant)+1);
 		}
 		
 	}

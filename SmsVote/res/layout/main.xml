@@ -10,10 +10,22 @@
         android:layout_height="wrap_content"
         android:text="@string/button_off" />
 
+    <TextView
+        android:id="@+id/startTimeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/start_time" />
+
+    <TextView
+        android:id="@+id/endTimeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/end_time" />
+
     <ListView
         android:id="@+id/resultList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="match_parent" >
     </ListView>
 
 </LinearLayout>

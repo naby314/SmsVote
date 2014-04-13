@@ -8,6 +8,8 @@ import android.telephony.SmsMessage;
 import android.widget.Toast;
 
 public class SmsReceiver extends BroadcastReceiver{
+	
+	
 	public DataHelper data = new DataHelper();
 	
 	
